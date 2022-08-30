@@ -12,8 +12,8 @@ const router = Router();
 
 router.use('/productos', RouteProduct);
 router.use('/ordenes', RouteOrder);
-router.use('/filtros', RouteEnvio);
-router.use('/envio', RouteFiltros);
+router.use('/filtros', RouteFiltros);
+router.use('/envio', RouteEnvio);
 
 
 module.exports = router;

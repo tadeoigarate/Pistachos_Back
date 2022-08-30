@@ -1,6 +1,6 @@
-const { Product} = require("../db");
 const { Router } = require("express");
 const router = Router();
+const { Product } = require("../db");
 
 
 router.get("/pizza", async (req, res) => {
