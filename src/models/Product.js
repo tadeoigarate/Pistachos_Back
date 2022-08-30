@@ -29,32 +29,22 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-
-    valoration: {
-      type: DataTypes.ENUM("1", "2", "3", "4", "5"),
-    },
     category: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     disabled: {
-        type: DataTypes.STRING,
-        defaultValue: "no",
-      },
-
-    outsanding: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
-
-    count:{
+    quantity:{
       type: DataTypes.INTEGER,
       allowNull: true,
       defaultValue:1
     },
-
     stock: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
       allowNull: false,
     },
   });

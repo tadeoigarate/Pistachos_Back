@@ -8,11 +8,11 @@ module.exports = (sequelize) => {
 			autoIncrement: true,
 			allowNull: false,
 		},
-		amount: {  // debería ser como una foto del precio que viene de product para hacerlo persistente en el tiempo....
+		amount: {
 			type: DataTypes.DECIMAL,
 			allowNull: false,
 		},
-		quantity: { // cantidad de producto q viene de la asociacion de products 
+		quantity: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			defaultValue: 1
