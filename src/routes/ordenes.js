@@ -50,15 +50,18 @@ router.get('/asc', async (req, res) => {
 
     try {
       const orden = await Order.findAll({
+        order: [
+          ["buyDate", "ASC"]
+        ],
         include: [
-            { model: Product, attributes: ['id','name', 'image', 'price', "category"], through: {
-              attributes: ['amount','quantity']
-            }}
-          ],
-        order: [["buyDate", "ASC"]]
+          { model: Product, attributes: ['id','name', 'image', 'price', "category"], through: {
+            attributes: ['amount','quantity']
+          }},
+          {model: Envio}
+        ]
       })
 
-      if (orden) return res.send('Orden no encontrada...')
+      if (!orden) return res.send('Orden no encontrada...')
 
       return res.send(orden)
     } catch (error) {
@@ -72,14 +75,15 @@ router.get('/desc', async (req, res) => {
     try {
       const orden = await Order.findAll({
         include: [
-            { model: Product, attributes: ['id','name', 'image', 'price', "category"], through: {
-              attributes: ['amount','quantity']
-            }}
-          ],
+          { model: Product, attributes: ['id','name', 'image', 'price', "category"], through: {
+            attributes: ['amount','quantity']
+          }},
+          {model: Envio}
+        ],
         order: [["buyDate", "DESC"]]
       })
 
-      if (orden) return res.send('Orden no encontrada...')
+      if (!orden) return res.send('Orden no encontrada...')
 
       return res.send(orden)
     } catch (error) {
