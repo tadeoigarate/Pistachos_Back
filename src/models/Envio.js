@@ -27,5 +27,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+     referencia: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
  })
 }
