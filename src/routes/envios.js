@@ -2,8 +2,9 @@ const { Router } = require("express");
 const router = Router();
 const {Envio} = require("../db")
 
-router.post("/", async (req, res) => {
-    const {barrio, lote, manzana, nombreCompleto, referencia, telefono, orderId } = req.body;
+router.post("/:orderId", async (req, res) => {
+    const {barrio, lote, manzana, nombreCompleto, referencia, telefono } = req.body;
+    const {orderId} = req.params
   
     if (barrio, lote, manzana, nombreCompleto, telefono) {
       Envio.create({

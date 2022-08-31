@@ -13,9 +13,9 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.NOW,
         allowNull: true,
     },
-    // metodoDePago: {
-    //   type: DataTypes.ENUM('Mercado Pago','Efectivo', "Transferencia"),
-    //   allowNull: true
-    // }
+    metodoDePago: {
+      type: DataTypes.ENUM('Mercado Pago','Efectivo', "Transferencia"),
+      allowNull: true
+    }
   })
 }
