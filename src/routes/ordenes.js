@@ -5,11 +5,15 @@ const { Product, Order, Orderline, Envio } = require('../db.js');
 
 //ruta post donde se crea la orden de compra
 router.post('/', async (req, res, next) => {
+  const {shipping, metodoDePago} = req.body
   try {
-    const orden = await Order.create()
+    const orden = await Order.create({
+      shipping, 
+      metodoDePago
+    })
     
     // Itera sobre cada {} de orderlines enviado del carrito del front del usuario
-    await req.body.forEach(async (orderline) => {
+    await req.body.productos.forEach(async (orderline) => {
       const { productId, quantity, amount } = orderline;
 
 

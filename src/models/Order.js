@@ -6,7 +6,6 @@ module.exports = (sequelize) => {
   sequelize.define("order", {
     shipping: {
         type: DataTypes.ENUM('Retiro en Tienda','Envio a domicilio'),
-        defaultValue: "Envio a domicilio",
         allowNull: true
     },
     buyDate: {
@@ -14,5 +13,9 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.NOW,
         allowNull: true,
     },
+    // metodoDePago: {
+    //   type: DataTypes.ENUM('Mercado Pago','Efectivo', "Transferencia"),
+    //   allowNull: true
+    // }
   })
 }

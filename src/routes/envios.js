@@ -3,7 +3,7 @@ const router = Router();
 const {Envio} = require("../db")
 
 router.post("/", async (req, res) => {
-    const {barrio, lote, manzana, nombreCompleto, referencia, telefono } = req.body;
+    const {barrio, lote, manzana, nombreCompleto, referencia, telefono, orderId } = req.body;
   
     if (barrio, lote, manzana, nombreCompleto, telefono) {
       Envio.create({
@@ -12,7 +12,8 @@ router.post("/", async (req, res) => {
         manzana, 
         nombreCompleto, 
         referencia, 
-        telefono
+        telefono,
+        orderId
       });
       return res.send("direccion creada correctamente");
     } else {
