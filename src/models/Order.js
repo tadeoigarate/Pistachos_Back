@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("order", {
     shipping: {
-        type: DataTypes.ENUM('Retiro en Tienda','Envio a domicilio'),
+        type: DataTypes.ENUM('Retiro en Tienda','Envio a San Nicolas/Mariano Moreno', 'Envio a Countries' ),
         allowNull: true
     },
     buyDate: {
