@@ -7,7 +7,7 @@ router.post("/:orderId", async (req, res) => {
     const {orderId} = req.params
   
     if (barrio, lote, manzana, nombreCompleto, telefono) {
-      Envio.create({
+      const direccion = Envio.create({
         barrio, 
         lote, 
         manzana, 
@@ -16,7 +16,7 @@ router.post("/:orderId", async (req, res) => {
         telefono,
         orderId
       });
-      return res.send("direccion creada correctamente");
+      return res.send(direccion);
     } else {
       return res.status(400).send("Please, insert the information correctly");
     }
