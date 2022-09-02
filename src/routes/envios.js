@@ -7,7 +7,7 @@ router.post("/:orderId", async (req, res) => {
     const {orderId} = req.params
   
     if (barrio, lote, manzana, nombreCompleto, telefono) {
-      const direccion = Envio.create({
+      const direccion = await Envio.create({
         barrio, 
         lote, 
         manzana, 
