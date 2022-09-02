@@ -96,18 +96,24 @@ router.get('/desc', async (req, res) => {
     }
 });
 
-//get de las ordenes pero para buscar por productos
-// router.get('/users/ordersByQuery', async (req, res) => {
-//     const { order } = req.query
-//     try {
-//       let byStatus = await Order.findAll({
-//         where :{status: order }
-//       })
-
-//       return res.status(200).send(byStatus);
-//     } catch (error) {
-//       res.status(500).json({ msg: err });
-//     }
-// });
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: id,
+      },
+	    include: [
+          { model: Product, attributes: ['id','name', 'image', 'price', "category"], through: {
+            attributes: ['amount','quantity']
+          }},
+          {model: Envio}
+        ],	    
+    });
+    return res.status(200).json(order);
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+});
 
 module.exports = router;
