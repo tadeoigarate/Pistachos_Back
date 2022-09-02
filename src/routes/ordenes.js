@@ -21,8 +21,13 @@ router.post('/', async (req, res, next) => {
       await orden.addProducts(productId, { through: { quantity: quantity, amount: amount }})
       return
     })
+
+    const tadeo = {
+      body: req.body,
+      id: orden.id
+    }
   
-    return res.status(200).send(req.body)
+    return res.status(200).send(tadeo)
   } catch (error) {
     console.log(error)
     new Error(error)
@@ -107,7 +112,6 @@ router.get("/:id", async (req, res) => {
           { model: Product, attributes: ['id','name', 'image', 'price', "category"], through: {
             attributes: ['amount','quantity']
           }},
-          {model: Envio}
         ],	    
     });
     return res.status(200).json(order);
