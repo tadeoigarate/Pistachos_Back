@@ -5,7 +5,7 @@ const { Product, Order, Orderline, Envio } = require('../db.js');
 
 //ruta post donde se crea la orden de compra
 router.post('/', async (req, res, next) => {
-  console.log(req.body)
+
   const {shipping, metodoDePago} = req.body
   try {
     const orden = await Order.create({
@@ -22,7 +22,7 @@ router.post('/', async (req, res, next) => {
       return
     })
   
-    return res.status(200).send(orden)
+    return res.status(200).send(req.body)
   } catch (error) {
     console.log(error)
     new Error(error)

@@ -22,5 +22,18 @@ router.post("/:orderId", async (req, res) => {
     }
   });
 
+  router.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+      const envio = await Envio.findOne({
+        where: {
+          orderId: id,
+        },
+      });
+      return res.status(200).json(envio);
+    } catch (error) {
+      res.status(500).json({ msg: error });
+    }
+  });
 
 module.exports = router;
