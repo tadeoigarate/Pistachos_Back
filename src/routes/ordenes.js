@@ -116,4 +116,19 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedProduct = await Order.findByPk(id);
+    if (!deletedProduct) {
+      return res.status(404).send("Product not found");
+    }
+    await deletedProduct.destroy();
+    res.status(200).send("Product deleted successfully");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
