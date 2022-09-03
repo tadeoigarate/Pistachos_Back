@@ -8,15 +8,35 @@ router.post('/', async (req, res, next) => {
 
   const {shipping, metodoDePago} = req.body
   try {
+    let totalPrice;
+
+    if(shipping === "Envio a San Nicolas/Mariano Moreno" ){
+      let aux = 150
+      req.body.productos.map(e =>  aux = aux + e.amount*1)
+      totalPrice = aux
+      console.log(totalPrice)
+    }
+    if(shipping === "Envio a Countries"){
+      let aux = 200
+      req.body.productos.map(e => aux = aux + e.amount*1)
+      totalPrice = aux
+      console.log(totalPrice)
+    } 
+    if(shipping === "Retiro en Tienda"){
+      let aux = 0
+      req.body.productos.map(e =>  aux = aux + e.amount*1)
+      totalPrice = aux
+      console.log(totalPrice)
+    }
     const orden = await Order.create({
       shipping, 
-      metodoDePago
+      metodoDePago,
+      totalPrice,
     })
     
     // Itera sobre cada {} de orderlines enviado del carrito del front del usuario
     await req.body.productos.forEach(async (orderline) => {
       const { productId, quantity, amount } = orderline;
-
 
       await orden.addProducts(productId, { through: { quantity: quantity, amount: amount }})
       return
@@ -24,6 +44,7 @@ router.post('/', async (req, res, next) => {
 
     const tadeo = {
       body: req.body,
+      totalPrice,
       id: orden.id
     }
   

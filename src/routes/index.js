@@ -10,10 +10,10 @@ const router = Router();
 
 // Configurar los routers
 
-router.use('/productos', RouteProduct);
+router.use('/envio', RouteEnvio);
 router.use('/ordenes', RouteOrder);
 router.use('/filtros', RouteFiltros);
-router.use('/envio', RouteEnvio);
+router.use('/productos', RouteProduct);
 
 
 module.exports = router;

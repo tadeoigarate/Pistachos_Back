@@ -16,6 +16,10 @@ module.exports = (sequelize) => {
     metodoDePago: {
       type: DataTypes.ENUM('Mercado Pago','Efectivo', "Transferencia"),
       allowNull: true
-    }
+    },
+    totalPrice: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+  },
   })
 }
