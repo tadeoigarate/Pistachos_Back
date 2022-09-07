@@ -3,10 +3,22 @@ const router = Router();
 
 const { Product, Order, Orderline, Envio } = require('../db.js');
 
-//ruta post donde se crea la orden de compra
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res) => {
+  try {
+    const orden = await Order.create()
 
+    return res.status(200).send(orden)
+  } catch (error) {
+    res.status(500).json({ msg: err });
+  }
+})
+
+//ruta post donde se crea la orden de compra
+router.put('/put/:id', async (req, res, next) => {
+  const {id} = req.params
   const {shipping, metodoDePago} = req.body
+
+  const updatedOrden = await Order.findByPk(id);
   try {
     let totalPrice;
 
@@ -28,24 +40,26 @@ router.post('/', async (req, res, next) => {
       totalPrice = aux
       console.log(totalPrice)
     }
-    const orden = await Order.create({
+    await updatedOrden.update({
       shipping, 
       metodoDePago,
       totalPrice,
     })
     
     // Itera sobre cada {} de orderlines enviado del carrito del front del usuario
-    await req.body.productos.forEach(async (orderline) => {
-      const { productId, quantity, amount } = orderline;
 
-      await orden.addProducts(productId, { through: { quantity: quantity, amount: amount }})
-      return
-    })
-
+    if(req.body.productos){
+      await req.body.productos.forEach(async (orderline) => {
+        const { productId, quantity, amount } = orderline;
+  
+        await updatedOrden.addProducts(productId, { through: { quantity: quantity, amount: amount }})
+        return
+      })
+    }
     const tadeo = {
       body: req.body,
       totalPrice,
-      id: orden.id
+      id: updatedOrden.id
     }
   
     return res.status(200).send(tadeo)
